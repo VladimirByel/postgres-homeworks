@@ -12,5 +12,5 @@ CREATE TABLE discontinued_products AS (SELECT * FROM products WHERE discontinued
 -- Для 4-го пункта может потребоваться удаление ограничения, связанного с foreign_key. Подумайте, как это можно решить, чтобы связь с таблицей order_details все же осталась.
 ALTER TABLE order_details DROP CONSTRAINT fk_order_details_products
 DELETE FROM products WHERE discontinued = 1
-
+DELETE FROM order_details WHERE NOT EXISTS(SELECT order_id FROM orders)
 -- ALTER TABLE ONLY order_details ADD CONSTRAINT fk_order_details_products FOREIGN KEY (product_id) REFERENCES products
